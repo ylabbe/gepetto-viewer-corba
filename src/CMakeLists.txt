@@ -33,14 +33,14 @@ FOREACH(IDL ${IDL_SOURCES})
     DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/gepetto/viewer/corba)
 
   # Python
-  GENERATE_IDL_PYTHON (gepetto/viewer/corba/${IDL}
-    ${CMAKE_SOURCE_DIR}/idl/gepetto/viewer
-    ARGUMENTS
-    -p${CMAKE_SOURCE_DIR}/cmake/hpp/idl
-    -bomniidl_be_python_with_docstring
+  SET(_IDL_PYTHON_ARGUMENTS
     -C${CMAKE_CURRENT_BINARY_DIR}
     -K
     -Wbpackage=gepetto.corbaserver
+    )
+  GENERATE_IDL_PYTHON (gepetto/viewer/corba/${IDL}
+    ${CMAKE_SOURCE_DIR}/idl/gepetto/viewer
+    ARGUMENTS ${_IDL_PYTHON_ARGUMENTS}
     )
 
   STRING(REGEX REPLACE "-" "_" IDL_UNDERSCORE "${IDL}")
